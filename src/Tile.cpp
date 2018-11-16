@@ -22,7 +22,7 @@ std::string Tile::repr()
 		ss << TERM::FG_RED << "B" << TERM::FG_DEF;
 	}else
 	{
-		ss << TERM::FG_BLUE << (adj + 48) << TERM::FG_DEF;
+		ss << TERM::FG_BLUE << adj << TERM::FG_DEF;
 	}
 	return ss.str();
 }
