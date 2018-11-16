@@ -31,7 +31,7 @@ Board::Board(int width, int height)
 void Board::generate(int bombs)
 {
 	// TODO: check that space is not already a bomb, seed rand
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < bombs; i++)
 	{
 		board[std::rand() % width][std::rand() % height].set_bomb(true);
 	}
