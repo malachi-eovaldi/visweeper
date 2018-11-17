@@ -6,7 +6,9 @@
 #include "tformat.h"
 #include "tile.h"
 
-Tile::Tile() : adj(0), bomb(false), flagged(false), hidden(true) {}
+Tile::Tile(): adj(0), bomb(false), flagged(false), hidden(true)
+{
+}
 
 std::string Tile::repr()
 {
