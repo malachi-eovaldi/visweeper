@@ -1,14 +1,15 @@
 // board.cpp
 
 #include<vector>
-#include<random>
 #include<sstream>
 
+#include "rand.h"
 #include "tile.h"
 #include "board.h"
 
 Board::Board(int width, int height)
 {
+	
 	this->width = width;
 	this->height = height;
 
@@ -33,7 +34,8 @@ void Board::generate(int bombs)
 	// TODO: check that space is not already a bomb, seed rand
 	for(int i = 0; i < bombs; i++)
 	{
-		board[std::rand() % width][std::rand() % height].set_bomb(true);
+		board[rand_gen::get_rand_range(width)][rand_gen::get_rand_range(height)]
+				.set_bomb(true);
 	}
 }
 
