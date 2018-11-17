@@ -15,8 +15,8 @@ class Tile
 		void set_flagged(bool b);
 		bool is_hidden();
 		void set_hidden(bool b);
-		std::string repr();
-		std::string debug();
+		std::string repr(); // Visual representation string for terminal
+		std::string debug(); // Print internal values with one call for debug
 
 	private:
 		int adj;

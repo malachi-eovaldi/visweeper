@@ -2,24 +2,24 @@
 
 #include<string>
 
-namespace TERM
+namespace TERM // Named constants for Linux terminal formatting sequences
 {
 	const std::string 
-
+		// Font types
 		BOLD_ON		=	"\e[1m",
 		BOLD_OFF	=	"\e[21m",
 		DIM_ON		=	"\e[2m",
 		DIM_OFF		=	"\e[22m",
-		ULN_ON		=	"\e[4m",
+		ULN_ON		=	"\e[4m",	// Underline
 		ULN_OFF		=	"\e[24m",
 		BLINK_ON	=	"\e[5m",
 		BLINK_OFF	=	"\e[25m",
-		INV_ON		=	"\e[7m",
+		INV_ON		=	"\e[7m",	// Reverse background and foreground color
 		INV_OFF		=	"\e[27m",
-		HIDE_ON		=	"\e[8m",
+		HIDE_ON		=	"\e[8m",	// Hidden text
 		HIDE_OFF	=	"\e[28m",
-		RES			=	"\e[0m",
-
+		RES			=	"\e[0m",	// Reset all above options
+		// Foreground colors
 		FG_DEF		=	"\e[39m",
 		FG_BLACK 	=	"\e[30m",
 		FG_RED		=	"\e[31m",
@@ -37,7 +37,7 @@ namespace TERM
 		FG_LMAGENTA	=	"\e[95m",
 		FG_LCYAN	=	"\e[96m",
 		FG_WHITE	=	"\e[97m",
-
+		// Background colors
 		BG_DEF		=	"\e[49m",
 		BG_BLACK 	=	"\e[40m",
 		BG_RED		=	"\e[41m",

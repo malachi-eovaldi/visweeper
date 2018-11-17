@@ -12,6 +12,7 @@ Tile::Tile(): adj(0), bomb(false), flagged(false), hidden(true)
 
 std::string Tile::repr()
 {
+	// Return a color code, character representation, then color reset code
 	std::stringstream ss;
 	if(flagged)
 	{
