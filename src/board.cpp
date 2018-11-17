@@ -26,11 +26,15 @@ Board::Board(int width, int height)
 
 void Board::generate(int bombs)
 {
-	// TODO: check that space is not already a bomb
+	int randx, randy;
 	for(int i = 0; i < bombs; i++)
 	{
-		board[rand_gen::get_rand_range(width)][rand_gen::get_rand_range(height)]
-				.set_bomb(true);
+		do
+		{
+			randx = rand_gen::get_rand_range(width);
+			randy = rand_gen::get_rand_range(height);
+		}while(board[randx][randy].is_bomb());
+		board[randx][randy].set_bomb(true);
 	}
 }
 

@@ -8,7 +8,7 @@
 int main()
 {
 	rand_gen::time_seed();
-	Board b(80,24);
+	Board b(10,10);
 	b.generate(50);
 	std::cout << b.repr();
 }
