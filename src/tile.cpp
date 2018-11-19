@@ -16,17 +16,21 @@ std::string Tile::repr()
 	std::stringstream ss;
 	if(flagged)
 	{
-		ss << TERM::FG_YELLOW << "F" << TERM::FG_DEF;
+		ss << TERM::FG_YELLOW << 'F';
 	}else if(hidden)
 	{
-		ss << TERM::FG_GREEN << "H" << TERM::FG_DEF;
+		ss << TERM::FG_GREEN << 'H';
 	}else if(bomb)
 	{
-		ss << TERM::FG_RED << "B" << TERM::FG_DEF;
+		ss << TERM::FG_RED << 'B';
+	}else if(adj == 0)
+	{
+		ss << TERM::FG_BLUE << ' ';
 	}else
 	{
-		ss << TERM::FG_BLUE << adj << TERM::FG_DEF;
+		ss << TERM::FG_BLUE << adj;
 	}
+	ss << TERM::FG_DEF;
 	return ss.str();
 }
 
@@ -76,4 +80,9 @@ std::string Tile::debug()
 	ss << "adj:\t" << this->adj << "\nbomb:\t" << this->bomb << "\nflag:\t" <<
 			this->flagged << "\nhidden:\t" << this->hidden << std::endl;
 	return ss.str();
+}
+
+void Tile::increment_adj()
+{
+	adj++;
 }

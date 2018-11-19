@@ -9,6 +9,7 @@ class Tile
 		Tile();
 		int get_adj();
 		void set_adj(int adj);
+		void increment_adj();
 		bool is_bomb();
 		void set_bomb(bool b);
 		bool is_flagged();
