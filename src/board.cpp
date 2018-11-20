@@ -16,13 +16,13 @@ Board::Board(int width, int height)
 	// Set vectors to the proper size and initialize with a Tile
 	board.resize(width, std::vector<Tile>(height, Tile()));
 
-	for(int y = 0; y < height; y++)
-	{
-		for(int x = 0; x < width; x++)
-		{
-			board[x][y].set_hidden(false);
-		}
-	}
+//	for(int y = 0; y < height; y++)
+//	{
+//		for(int x = 0; x < width; x++)
+//		{
+//			board[x][y].set_hidden(false);
+//		}
+//	}
 }
 
 void Board::generate(int bombs)
@@ -41,13 +41,13 @@ void Board::generate(int bombs)
 		// Generate numbers
 		char which = 0b11111111;
 		if(randx == 0)
-			which &= ~(Board::TL_DIAG | Board::LEFT | Board::BL_DIAG);
+			which &= ~(TL_DIAG | LEFT | BL_DIAG);
 		if(randx == width-1)
-			which &= ~(Board::TR_DIAG | Board::RIGHT | Board::BR_DIAG);
+			which &= ~(TR_DIAG | RIGHT | BR_DIAG);
 		if(randy == 0)
-			which &= ~(Board::TL_DIAG | Board::TOP | Board::TR_DIAG);
+			which &= ~(TL_DIAG | TOP | TR_DIAG);
 		if(randy == height-1)
-			which &= ~(Board::BL_DIAG | Board::BOTTOM | Board::BR_DIAG);
+			which &= ~(BL_DIAG | BOTTOM | BR_DIAG);
 		increment_adj(randx, randy, which);
 	}
 }
@@ -55,11 +55,25 @@ void Board::generate(int bombs)
 std::string Board::repr()
 {
 	std::stringstream ss;
-	for(int y = 0; y < height; y++)
+	// If a tile is on the border, draw the proper char, otherwise get its repr()
+	for(int y = -1; y < height+1; y++)
 	{
-		for(int x = 0; x < width; x++)
+		for(int x = -1; x < width+1; x++)
 		{
-			ss << board[x][y].repr(); // Add each tile's representation
+			if(x == -1 && y == -1)
+				ss << "╔";
+			else if(x == -1 && y == height)
+				ss << "╚";
+			else if(x == width && y == -1)
+				ss << "╗";
+			else if(x == width && y == height)
+				ss << "╝";
+			else if(x == -1 || x == width)
+				ss << "║";
+			else if(y == -1 || y == height)
+				ss << "═";
+			else
+				ss << board[x][y].repr();
 		}
 		ss << '\n';
 	}
