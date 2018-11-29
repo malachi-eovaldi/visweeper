@@ -16,17 +16,20 @@ Board::Board(int width, int height)
 	// Set vectors to the proper size and initialize with a Tile
 	board.resize(width, std::vector<Tile>(height, Tile()));
 
-//	for(int y = 0; y < height; y++)
-//	{
-//		for(int x = 0; x < width; x++)
-//		{
-//			board[x][y].set_hidden(false);
-//		}
-//	}
+	for(int y = 0; y < height; y++)
+	{
+		for(int x = 0; x < width; x++)
+		{
+			//board[x][y].set_hidden(false);
+		}
+	}
 }
 
 void Board::generate(int bombs)
-{
+{	/* TODO: add check to ensure that requested number of bombs does not exceed
+	 * the number of tiles on the board, resulting in an infinte loop as the
+	 * function continually try new locations and fails due to not having any
+	 * empty slots left */
 	// Randomly place bombs, then increment numbers around them
 	int randx, randy;
 	for(int i = 0; i < bombs; i++)
@@ -98,4 +101,9 @@ void Board::increment_adj(int x, int y, char which)
 		board[x][y+1].increment_adj();
 	if(which & BR_DIAG)
 		board[x+1][y+1].increment_adj();
+}
+
+void Board::open_tile_at(int x, int y)
+{
+	board[x][y].set_hidden(false);
 }
