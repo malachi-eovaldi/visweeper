@@ -11,6 +11,7 @@ class Board // Class for storing the game board and all its tiles
 		void generate(int bombs=10); // Place bombs and adjacent numbers
 		std::string repr(); // Return visual representation for terminal output
 		void open_tile_at(int x, int y); // Set board[x][y] to not hidden
+		void toggle_flag_at(int x, int y); // Toggle board[x][y] flag state
 
 		const static char
 				TL_DIAG = 1,		// Top left diagonal

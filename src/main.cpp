@@ -15,10 +15,10 @@ int main()
 	do
 	{
 		std::cout << b.repr();
-		std::cout << "Please type the x coordinate to expose: ";
+		std::cout << "Please type the x coordinate to flag: ";
 		std::cin >> x;
-		std::cout << "Please type the y coordinate to expose: ";
+		std::cout << "Please type the y coordinate to flag: ";
 		std::cin >> y;
-		b.open_tile_at(x, y);
+		b.toggle_flag_at(x, y);
 	}while(!std::cin.eof());
 }

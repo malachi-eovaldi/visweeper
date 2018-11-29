@@ -107,3 +107,8 @@ void Board::open_tile_at(int x, int y)
 {
 	board[x][y].set_hidden(false);
 }
+
+void Board::toggle_flag_at(int x, int y)
+{
+	board[x][y].set_flagged(!board[x][y].is_flagged());
+}
