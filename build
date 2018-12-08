@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo Building...
-g++ -std=c++17 src/*.cpp -o ms.o
-
