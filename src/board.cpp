@@ -4,8 +4,8 @@
 #include<sstream>
 #include<stack>
 #include<iostream>
+#include<random>
 
-#include "rand.h"
 #include "tile.h"
 #include "board.h"
 #include "coord.h"
@@ -39,8 +39,10 @@ void Board::generate(int bombs)
 	{
 		do
 		{ // Pick a new coord until we find one not already a bomb
-			randx = rand_gen::get_rand_range(width);
-			randy = rand_gen::get_rand_range(height);
+			//randx = rand_gen::get_rand_range(width);
+			//randy = rand_gen::get_rand_range(height);
+			randx = rand() % width;
+			randy = rand() % height;
 		}while(board[randx][randy].is_bomb());
 		board[randx][randy].set_bomb(true); // Set to bomb
 

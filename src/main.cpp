@@ -1,13 +1,15 @@
 // main.cpp
 
 #include<iostream>
+#include<random>
+#include<time.h>
 
 #include "board.h"
-#include "rand.h"
 
 int main()
 {
-	//rand_gen::time_seed();
+	//Disabled now for testing so the same board generates every time
+	//srand(time(NULL));
 	Board b(10,10);
 	b.generate(10);
 
