@@ -48,31 +48,31 @@ void Board::generate(int bombs)
 
 		// Place numbers indicating amount of adjacent bombs
 		// TODO: switch to get_valid_tiles function once complete
-		char which = 0b11111111;
+		char loc = 0b11111111;
 		if(randx == 0)
-			which &= ~(TL_DIAG | LEFT | BL_DIAG);
+			loc &= ~(TL_DIAG | LEFT | BL_DIAG);
 		if(randx == width-1)
-			which &= ~(TR_DIAG | RIGHT | BR_DIAG);
+			loc &= ~(TR_DIAG | RIGHT | BR_DIAG);
 		if(randy == 0)
-			which &= ~(TL_DIAG | TOP | TR_DIAG);
+			loc &= ~(TL_DIAG | TOP | TR_DIAG);
 		if(randy == height-1)
-			which &= ~(BL_DIAG | BOTTOM | BR_DIAG);
-		increment_adj(randx, randy, which);
+			loc &= ~(BL_DIAG | BOTTOM | BR_DIAG);
+		increment_adj(randx, randy, loc);
 	}
 }
 
 char Board::get_valid_tiles_around(int x, int y)
 {
-		char which = 0b11111111;
+		char loc = 0b11111111;
 		if(x == 0)
-			which &= ~(TL_DIAG | LEFT | BL_DIAG);
+			loc &= ~(TL_DIAG | LEFT | BL_DIAG);
 		if(x == width-1)
-			which &= ~(TR_DIAG | RIGHT | BR_DIAG);
+			loc &= ~(TR_DIAG | RIGHT | BR_DIAG);
 		if(y == 0)
-			which &= ~(TL_DIAG | TOP | TR_DIAG);
+			loc &= ~(TL_DIAG | TOP | TR_DIAG);
 		if(y == height-1)
-			which &= ~(BL_DIAG | BOTTOM | BR_DIAG);
-		return which;
+			loc &= ~(BL_DIAG | BOTTOM | BR_DIAG);
+		return loc;
 }
 
 std::string Board::repr()
@@ -103,23 +103,23 @@ std::string Board::repr()
 	return ss.str();
 }
 
-void Board::increment_adj(int x, int y, char which)
+void Board::increment_adj(int x, int y, char loc)
 {
-	if(which & TL_DIAG)
+	if(loc & TL_DIAG)
 		board[x-1][y-1].increment_adj();
-	if(which & TOP)
+	if(loc & TOP)
 		board[x][y-1].increment_adj();
-	if(which & TR_DIAG)
+	if(loc & TR_DIAG)
 		board[x+1][y-1].increment_adj();
-	if(which & LEFT)
+	if(loc & LEFT)
 		board[x-1][y].increment_adj();
-	if(which & RIGHT)
+	if(loc & RIGHT)
 		board[x+1][y].increment_adj();
-	if(which & BL_DIAG)
+	if(loc & BL_DIAG)
 		board[x-1][y+1].increment_adj();
-	if(which & BOTTOM)
+	if(loc & BOTTOM)
 		board[x][y+1].increment_adj();
-	if(which & BR_DIAG)
+	if(loc & BR_DIAG)
 		board[x+1][y+1].increment_adj();
 }
 
@@ -168,9 +168,9 @@ void Board::open_tile_at(int x, int y)
 	board[x][y].set_hidden(false);
 }
 
-std::string Board::which_repr(char which)
+std::string Board::loc_repr(char loc)
 {
-	switch(which)
+	switch(loc)
 	{
 		case TL_DIAG:
 			return "Top left diagonal";
@@ -198,20 +198,20 @@ void Board::auto_open_at(int x, int y)
 	std::cout << "auto_open_at (" << x << ", " << y << ")\n";
 	open_tile_at(x, y);
 	char valid = get_valid_tiles_around(x, y);
-	// There are 8 "which" positions, iterate through them
+	// There are 8 "loc" positions, iterate through them
 	for(int w = 1; w < 1<<8; w <<= 1)
 	{
-		std::cout << "Checking at " << which_repr(w) << std::endl;
+		std::cout << "Checking at " << loc_repr(w) << std::endl;
 		if(valid & w)
 		{
-			std::cout << "Valid at " << which_repr(w) << std::endl;
+			std::cout << "Valid at " << loc_repr(w) << std::endl;
 		}
 	}
 }
 
-int Board::get_x_offs(char which)
+int Board::get_x_offs(char loc)
 {
-	switch(which)
+	switch(loc)
 	{
 		case TL_DIAG:
 		case LEFT:
@@ -229,9 +229,9 @@ int Board::get_x_offs(char which)
 	}
 }
 
-int Board::get_y_offs(char which)
+int Board::get_y_offs(char loc)
 {
-	switch(which)
+	switch(loc)
 	{
 		case TL_DIAG:
 		case TOP:

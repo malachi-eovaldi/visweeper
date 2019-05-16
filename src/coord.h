@@ -9,5 +9,5 @@ class Coordinate
 	private:
 		int x, y; // Internal storage of x and y
 };
-// TODO: add getter functions that take in a which char and return the proper
+// TODO: add getter functions that take in a loc char and return the proper
 // offset x and/or y values

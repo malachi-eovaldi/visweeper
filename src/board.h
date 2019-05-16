@@ -22,8 +22,8 @@ class Board // Class for storing the game board and all its tiles
 		 * in the top left corner, thus they would be out of the bounds of the
 		 * board and trying to use them would give a segfault. */
 		char get_valid_tiles_around(int x, int y);
-		int get_x_offs(char which); // Get x offset of adjacent
-		int get_y_offs(char which); // Get y offset of adjacent
+		int get_x_offs(char loc); // Get x offset of adjacent
+		int get_y_offs(char loc); // Get y offset of adjacent
 
 		const static char
 				TL_DIAG = 1,		// (1)		Top left diagonal
@@ -34,15 +34,15 @@ class Board // Class for storing the game board and all its tiles
 				BL_DIAG = 1 << 5,	// (32)		Bottom left diagonal
 				BOTTOM = 1 << 6,	// (64)		Directly below
 				BR_DIAG = 1 << 7;	// (128)	Bottom right diagonal
-		/* Print out a string representation of a "which" char */
-		std::string which_repr(char which);
+		/* Print out a string representation of a "loc" char */
+		std::string loc_repr(char loc);
 	private:
 		std::vector<std::vector<Tile>> board; // Internal data storage
 		int width, height; // Width and height of the board
 		/* Increment each of the selected Tiles directly adjacent to the Tile at
-		 * board[x][y] with each bit of which corresponding to a specific
+		 * board[x][y] with each bit of loc corresponding to a specific
 		 * location according to the constants defined above */
-		void increment_adj(int x, int y, char which);
+		void increment_adj(int x, int y, char loc);
 		/* Returns whether or not to add this to the list of tiles to auto
 		 * expand around */
 		bool should_expand(int x, int y);
