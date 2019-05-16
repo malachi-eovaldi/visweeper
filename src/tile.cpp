@@ -34,7 +34,7 @@ std::string Tile::repr()
 	return ss.str();
 }
 
-int Tile::get_adj()
+int Tile::adj_bombs()
 {
 	return adj;
 }

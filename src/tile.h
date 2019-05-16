@@ -7,7 +7,7 @@ class Tile
 {
 	public:
 		Tile();
-		int get_adj();
+		int adj_bombs();
 		void set_adj(int adj);
 		void increment_adj();
 		bool is_bomb();

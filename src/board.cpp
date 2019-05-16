@@ -2,7 +2,7 @@
 
 #include<vector>
 #include<sstream>
-#include<stack>
+//#include<stack>
 #include<iostream>
 #include<random>
 
@@ -130,7 +130,7 @@ bool Board::should_expand(int x, int y)
 		std::cout << "should_expand returns false\n";
 		return false;
 	}
-	if(board[x][y].get_adj() !=0) // Tile is not empty
+	if(board[x][y].adj_bombs() !=0) // Tile is not empty
 	{
 		std::cout << "should_expand returns false\n";
 		return false;
