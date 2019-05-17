@@ -127,25 +127,30 @@ bool Board::should_expand(int x, int y)
 {
 	if(!board[x][y].is_hidden()) // Tile is open
 	{
-		std::cout << "should_expand returns false\n";
+		std::cout << "should_expand returns false @ ";
+		std::cout << x << ", " << y << "\n";
 		return false;
 	}
 	if(board[x][y].adj_bombs() !=0) // Tile is not empty
 	{
-		std::cout << "should_expand returns false\n";
+		std::cout << "should_expand returns false @ ";
+		std::cout << x << ", " << y << "\n";
 		return false;
 	}
 	if(board[x][y].is_bomb())
 	{
-		std::cout << "should_expand returns false\n";
+		std::cout << "should_expand returns false @ ";
+		std::cout << x << ", " << y << "\n";
 		return false;
 	}
 	if(board[x][y].is_flagged())
 	{
-		std::cout << "should_expand returns false\n";
+		std::cout << "should_expand returns false @ ";
+		std::cout << x << ", " << y << "\n";
 		return false;
 	}
-	std::cout << "should_expand returns true\n";
+	std::cout << "should_expand returns true @ ";
+	std::cout << x << ", " << y << "\n";
 	return true;
 }
 
@@ -193,18 +198,32 @@ std::string Board::loc_repr(char loc)
 	}
 }
 
-void Board::auto_open_at(int x, int y)
+void Board::auto_open_at(int x, int y, int iter)
 {
 	std::cout << "auto_open_at (" << x << ", " << y << ")\n";
-	open_tile_at(x, y);
+	if(iter == 0)
+	{
+		open_tile_at(x, y);
+	}
+	// Determine what adjacent tiles to check and/or open
 	char valid = get_valid_tiles_around(x, y);
 	// There are 8 "loc" positions, iterate through them
-	for(int w = 1; w < 1<<8; w <<= 1)
+	for(int l = 1; l < 1<<8; l <<= 1)
 	{
-		std::cout << "Checking at " << loc_repr(w) << std::endl;
-		if(valid & w)
+		//std::cout << "Checking at " << loc_repr(l) << std::endl;
+		if(valid & l) // The adjecent tile at this location is within bounds
 		{
-			std::cout << "Valid at " << loc_repr(w) << std::endl;
+			//std::cout << "Valid at " << loc_repr(l) << std::endl;
+			int nextx = x + get_x_offs(l);
+			int nexty = y + get_y_offs(l);
+			if(should_expand(nextx, nexty))
+			{
+				open_tile_at(nextx, nexty);
+				auto_open_at(nextx, nexty);
+			}else if(should_auto_open(nextx, nexty))
+			{
+				open_tile_at(nextx, nexty);
+			}
 		}
 	}
 }

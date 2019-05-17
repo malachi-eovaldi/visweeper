@@ -14,8 +14,11 @@ class Board // Class for storing the game board and all its tiles
 		void open_tile_at(int x, int y); // Set board[x][y] to not hidden
 		/* Open the tile at (x,y) then auto expand to open empty tiles around.
 		 * This method is preferable to open_tile_at() unless it is explicitly
-		 * required to only open the tile at (x,y) */
-		void auto_open_at(int x, int y);
+		 * required to only open the tile at (x,y), iter (iteration) should
+		 * always be 0 when called by any function other than itself.  It is
+		 * used to open the first tile regardless of conditions, then only open
+		 * subsequent tiles in the next iterations based on checks */
+		void auto_open_at(int x, int y, int iter=0);
 		void toggle_flag_at(int x, int y); // Toggle board[x][y] flag state
 		/* Return what tiles around (x,y) are valid E.g. if you input (0,0), it
 		 * will not return any tiles around the top or left because the (0,0) is
@@ -34,7 +37,7 @@ class Board // Class for storing the game board and all its tiles
 				BL_DIAG = 1 << 5,	// (32)		Bottom left diagonal
 				BOTTOM = 1 << 6,	// (64)		Directly below
 				BR_DIAG = 1 << 7;	// (128)	Bottom right diagonal
-		/* Print out a string representation of a "loc" char */
+		/* Print out a string representation of a "loc" (location) char */
 		std::string loc_repr(char loc);
 	private:
 		std::vector<std::vector<Tile>> board; // Internal data storage
