@@ -204,6 +204,7 @@ void Board::auto_open_at(int x, int y, int iter)
 	if(iter == 0)
 	{
 		open_tile_at(x, y);
+		if(board[x][y].adj_bombs() != 0) return;
 	}
 	// Determine what adjacent tiles to check and/or open
 	char valid = get_valid_tiles_around(x, y);
